@@ -1,0 +1,17 @@
+{
+  "name": "ftp-client",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TP N°7 - Redes de Información (UTN FRM) - Punto 4: cliente FTP web",
+  "scripts": {
+    "setup": "npm install && npm --prefix server install && npm --prefix web install",
+    "dev": "concurrently -n api,web -c blue,green \"npm --prefix server run dev\" \"npm --prefix web run dev\"",
+    "build": "npm --prefix web run build && npm --prefix server run build",
+    "start": "npm --prefix server start",
+    "ftp:up": "docker compose up -d",
+    "ftp:down": "docker compose down"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

@@ -1,0 +1,18 @@
+# Servidor FTP de prueba para la demo (vsftpd sobre Alpine).
+# Usuario: demo / Contraseña: demo123
+# Los archivos quedan en la carpeta ./ftp-data
+services:
+  ftp:
+    image: delfer/alpine-ftp-server:latest
+    container_name: ftp-demo
+    ports:
+      - "21:21"                 # canal de control
+      - "21000-21010:21000-21010" # rango de puertos pasivos (canal de datos)
+    environment:
+      USERS: "demo|demo123"
+      ADDRESS: "localhost"      # IP que el servidor anuncia en la respuesta a PASV
+      MIN_PORT: "21000"
+      MAX_PORT: "21010"
+    volumes:
+      - ./ftp-data:/ftp/demo
+    restart: unless-stopped
